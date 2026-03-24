@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetching API</title>
+
+    <style>
+
+        *{
+
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+
+            display: flex;
+            justify-content: center;
+            height: 700px;
+            align-items: center;
+        }
+
+        .input-container {
+
+            margin-left: 10px;
+        }
+
+        .src-container {
+
+            padding: 50px;
+            padding-bottom: 10px;
+            border: none;
+            background-color:aliceblue;
+            border-radius: 10px;
+        }
+
+        #submitButton {
+
+            padding: 10px;
+            background-color: rgb(46, 178, 231);
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+
+            background-color: rgb(57, 169, 214);
+        }
+
+        #pokemonInput {
+
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(171, 168, 168);
+            max-width: 200px;
+            font-size: 1rem;
+        }
+        #pokemonInput:focus {
+
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="src-container">
+        <div class="input-container">
+            <input type="text" id="pokemonInput" placeholder="Pokemon Name" required onkeydown="enterToFetchPokemon(event) ">
+            <button id="submitButton" onclick="fetchPokemon()">Submit</button>
+        </div>
+        <img id="pokemonImage" src="pokemon-api-img.png" alt="PokemonSprite" width="300px">
+    </div>
+    <script>
+
+        async function fetchPokemon() {
+
+            try {
+
+                const inputElement = document.querySelector('#pokemonInput');
+                let pokemonInput = inputElement.value.toLowerCase();
+                const pokemonDetailsResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonInput}`);
+                
+                if(!pokemonDetailsResponse.ok) {
+
+                    throw new Error ("Cannot fetch the resource");
+                }
+                
+                const pokemonDetails = await pokemonDetailsResponse.json();
+                const pokemonSprite = pokemonDetails.sprites.front_default;
+                const imgPokemon = document.querySelector('#pokemonImage');
+
+                console.log(pokemonDetails);
+
+                imgPokemon.src = pokemonSprite;
+                inputElement.value = '';
+
+            }
+            catch(error) {
+
+                console.error(error);
+                window.alert(error);
+            }
+        }
+
+        function enterToFetchPokemon(event){
+
+            if(event.key === 'Enter') {
+
+                fetchPokemon();
+            }
+        }
+
+    </script>
+</body>
+</html>
