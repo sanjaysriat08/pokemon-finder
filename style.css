@@ -1,0 +1,57 @@
+
+*{
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+
+    display: flex;
+    justify-content: center;
+    height: 700px;
+    align-items: center;
+}
+
+.input-container {
+
+    margin-left: 10px;
+}
+
+.src-container {
+
+    padding: 50px;
+    padding-bottom: 10px;
+    border: none;
+    background-color:aliceblue;
+    border-radius: 10px;
+}
+
+#submitButton {
+
+    padding: 10px;
+    background-color: rgb(46, 178, 231);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#submitButton:hover {
+
+    background-color: rgb(57, 169, 214);
+}
+
+#pokemonInput {
+
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(171, 168, 168);
+    max-width: 200px;
+    font-size: 1rem;
+}
+#pokemonInput:focus {
+
+    background-color: white;
+}
